@@ -1,0 +1,16 @@
+{
+  "name": "wiki-pwa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "wikijs": "^2.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^2.1.6",
+    "webpack": "^2.2.1"
+  }
+}
