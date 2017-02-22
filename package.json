@@ -10,7 +10,13 @@
     "wikijs": "^2.0.1"
   },
   "devDependencies": {
+    "http-server": "^0.9.0",
+    "surge": "^0.18.0",
     "typescript": "^2.1.6",
     "webpack": "^2.2.1"
+  },
+  "scripts": {
+    "publish:surge": "surge dist/ https://asoifpwa.surge.sh",
+    "serve": "http-server dist/"
   }
 }
