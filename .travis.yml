@@ -1,5 +1,9 @@
 language: node_js
 node_js: node
+
+install:
+    - yarn
+
 deploy:
   provider: surge
   project: ./dist/
