@@ -1,0 +1,6 @@
+language: node_js
+node_js: node
+deploy:
+  provider: surge
+  project: ./dist/
+  domain: https://asoifpwa.surge.sh
