@@ -5,3 +5,4 @@ deploy:
   provider: surge
   project: ./dist/
   domain: https://asoifpwa.surge.sh
+  skip_cleanup: true
