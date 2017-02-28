@@ -1,15 +1,14 @@
-//This is the "Offline copy of pages" wervice worker
+var filesToCache = [
+  '/',
+  'main.js'
+];
 
 //Install stage sets up the index page (home page) in the cahche and opens a new cache
 self.addEventListener('install', function(event) {
-  var indexPage = new Request('index.html');
-  event.waitUntil(
-    fetch(indexPage).then(function(response) {
-      return caches.open('awoif-offline').then(function(cache) {
-        console.log('Cached index page during Install '+ response.url);
-        return cache.put(indexPage, response);
-      }); 
-  }));
+  event.waitUntil(caches.open('awoif-offline').then(function(cache) {
+        console.log('Cached files during install');
+        return cache.addAll(filesToCache);
+      }));
 });
 
 //If any fetch fails, it will look for the request in the cache and serve it from there first    
