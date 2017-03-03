@@ -7,7 +7,7 @@ module.exports = (env) => {
     return [{
         stats: { modules: false },
         entry: { 'main': './App/boot.tsx' },
-        resolve: { extensions: [ '.js', '.jsx', '.ts', '.tsx' ] },
+        resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
         output: {
             path: path.join(__dirname, bundleOutputDir),
             filename: '[name].js',
@@ -18,6 +18,14 @@ module.exports = (env) => {
                 { test: /\.tsx?$/, include: /App/, use: 'awesome-typescript-loader?silent=true' },
                 { test: /\.html?$/, use: 'file-loader?name=[path][name].[ext]' }
             ]
-        }
+        },
+        plugins: [
+            // Minify assets.
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false // https://github.com/webpack/webpack/issues/1496
+                }
+            })
+        ]
     }];
 };
