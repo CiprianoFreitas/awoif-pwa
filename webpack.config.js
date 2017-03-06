@@ -15,7 +15,7 @@ module.exports = (env) => {
         },
         module: {
             rules: [
-                { test: /\.tsx?$/, include: /App/, use: 'awesome-typescript-loader?silent=true' },
+                { test: /\.tsx?$/, include: /App/, use: ['react-hot-loader','awesome-typescript-loader?silent=true'] },
                 { test: /\.html?$/, use: 'file-loader?name=[path][name].[ext]' }
             ]
         },
