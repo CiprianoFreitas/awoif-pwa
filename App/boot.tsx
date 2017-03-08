@@ -2,7 +2,7 @@ import '../index.html'
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Hello } from "./Hello";
+import { App } from "./Components/App";
 
 declare var require: any;
 
@@ -14,7 +14,7 @@ if (typeof document !== 'undefined') {
         .catch((err : any) => console.log('Service worker failed to register', err))
 
     ReactDOM.render(
-        <Hello />,
+        <App />,
         document.getElementById("app")
     );
 }
