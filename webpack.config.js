@@ -5,27 +5,45 @@ const bundleOutputDir = './dist';
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
-        stats: { modules: false },
-        entry: { 'main': './App/boot.tsx' },
-        resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+        stats: {
+            modules: false
+        },
+        entry: {
+            'main': './App/boot.tsx'
+        },
+        resolve: {
+            extensions: ['.js', '.jsx', '.ts', '.tsx']
+        },
         output: {
             path: path.join(__dirname, bundleOutputDir),
             filename: '[name].js',
             publicPath: '/'
         },
         module: {
-            rules: [
-                { test: /\.tsx?$/, include: /App/, use: ['react-hot-loader','awesome-typescript-loader?silent=true'] },
-                { test: /\.html?$/, use: 'file-loader?name=[path][name].[ext]' }
+            rules: [{
+                    test: /\.js$/,
+                    include: /App/,
+                    use: 'babel-loader'
+                },{
+                    test: /\.ts(x?)$/,
+                    include: /App/,
+                    use: 'babel-loader'
+                },
+                {
+                    test: /\.tsx?$/,
+                    include: /App/,
+                    use: [
+                        'awesome-typescript-loader?silent=true'
+                    ]
+                },
+                {
+                    test: /\.html?$/,
+                    use: 'file-loader?name=[path][name].[ext]'
+                }
             ]
         },
         plugins: [
             // Minify assets.
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false // https://github.com/webpack/webpack/issues/1496
-                }
-            })
         ]
     }];
 };
