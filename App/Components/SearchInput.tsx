@@ -1,47 +1,54 @@
 import * as React from "react";
-import TextField from 'material-ui/TextField';
+import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import WikiSearchService from '../Services/WikiSearchService';
 interface WikiState {
         input: string;
         summary: string;
+        autocomplete: string[]
 }
 const buttonStyle = {
-  margin: 12,
+        margin: 12,
 };
 
 const bodyStyle = {
-        margin:10
+        margin: 10
 };
 
 export class SearchInput extends React.Component<any, WikiState> {
         constructor() {
                 super();
-                this.state = { input: '', summary: '' };
+                this.state = { input: '', summary: '', autocomplete: []};
         }
         handleTextChange(e) {
                 this.setState({ input: e.target.value });
         }
         handleSearch(e) {
-                fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${this.state.input}&exintro=1s&origin=*&redirects=`)
-                        .then(response => response.json() as Promise<any>)
-                        .then((res: any) => {
-                                let pages = res.query.pages;
-                                console.log(res);
-                                for (var key in pages) {
-                                        console.log(key)
-                                        if (pages.hasOwnProperty(key)) {
-                                                this.setState({ summary: pages[key].extract });
-                                        }
-                                }
-                        });
+                WikiSearchService.Search(this.state.input)
+                        .then(summary => this.setState({ summary }))
+        }
+        handleAutoComplete(value) {
+                WikiSearchService.Autocomplete(value)
+                        .then(results =>{ this.setState({ autocomplete: results });})
+        }
+        handleTapAutoComplete(term, index) {
+                if(index == -1) return;
+                WikiSearchService.Search(term)
+                        .then(summary => this.setState({ summary }))
         }
         public render() {
                 return <div style={bodyStyle}>
-                        <TextField
+                        <AutoComplete
+                                hintText="Search"
+                                dataSource={this.state.autocomplete}
+                                filter={AutoComplete.caseInsensitiveFilter}
+                                onUpdateInput={(e) => this.handleAutoComplete(e)}
+                                onNewRequest={(term, index) => this.handleTapAutoComplete(term, index)}
+                                />
+                        {/*<TextField
                                 hintText="Search"
                                 onChange={(e) => this.handleTextChange(e)}
-                        />
+                        />*/}
                         <RaisedButton onClick={(e) => this.handleSearch(e)} label="Search" primary={true} style={buttonStyle} />
                         <p dangerouslySetInnerHTML={{ __html: this.state.summary }}></p>
                 </div>
