@@ -1,14 +1,23 @@
 import * as React from "react";
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 interface WikiState {
         input: string;
         summary: string;
 }
+const buttonStyle = {
+  margin: 12,
+};
+
+const bodyStyle = {
+        margin:10
+};
 
 export class SearchInput extends React.Component<any, WikiState> {
         constructor() {
                 super();
-                this.state = { input: '', summary: 'Pesquisar primeiro' };
+                this.state = { input: '', summary: '' };
         }
         handleTextChange(e) {
                 this.setState({ input: e.target.value });
@@ -28,10 +37,13 @@ export class SearchInput extends React.Component<any, WikiState> {
                         });
         }
         public render() {
-                return <div>
-                        <input type="text" placeholder="Search" onChange={(e) => this.handleTextChange(e)} />
-                        <button onClick={(e) => this.handleSearch(e)}>Search</button>
-                        <p dangerouslySetInnerHTML={{__html: this.state.summary}}></p>
+                return <div style={bodyStyle}>
+                        <TextField
+                                hintText="Search"
+                                onChange={(e) => this.handleTextChange(e)}
+                        />
+                        <RaisedButton onClick={(e) => this.handleSearch(e)} label="Search" primary={true} style={buttonStyle} />
+                        <p dangerouslySetInnerHTML={{ __html: this.state.summary }}></p>
                 </div>
         }
 }

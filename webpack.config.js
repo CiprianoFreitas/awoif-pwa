@@ -21,15 +21,6 @@ module.exports = (env) => {
         },
         module: {
             rules: [{
-                    test: /\.js$/,
-                    include: /App/,
-                    use: 'babel-loader'
-                },{
-                    test: /\.ts(x?)$/,
-                    include: /App/,
-                    use: 'babel-loader'
-                },
-                {
                     test: /\.tsx?$/,
                     include: /App/,
                     use: [
