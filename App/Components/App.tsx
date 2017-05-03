@@ -18,7 +18,7 @@ export class App extends React.Component<any, undefined> {
             <div>
                 <AppBar
                     showMenuIconButton={false}
-                    title="Wiki of Fire and Ice"
+                    title="A Wiki of Ice and Fire"
                 />
                 <SearchInput />
             </div>
