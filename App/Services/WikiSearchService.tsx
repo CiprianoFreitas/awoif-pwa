@@ -5,9 +5,7 @@ export default class WikiSearchService {
             .then(response => response.json() as Promise<any>)
             .then((res: any) => {
                 let pages = res.query.pages;
-                console.log(res);
                 for (var key in pages) {
-                    console.log(key)
                     if (pages.hasOwnProperty(key)) {
                         return pages[key].extract;
                     }

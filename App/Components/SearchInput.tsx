@@ -29,8 +29,11 @@ export class SearchInput extends React.Component<any, WikiState> {
                         .then(summary => this.setState({ summary }))
         }
         handleAutoComplete(value) {
-                WikiSearchService.Autocomplete(value)
-                        .then(results => { this.setState({ autocomplete: results }); })
+                if (value != '')
+                        WikiSearchService.Autocomplete(value)
+                                .then(results => { this.setState({ autocomplete: results }); })
+                else
+                        this.setState({ autocomplete: [] });
         }
         handleTapAutoComplete(term, index) {
                 if (index == -1) return;
