@@ -6,17 +6,19 @@ interface WikiState {
 }
 
 export class Article extends React.Component<any, any> {
-        constructor() {
+        constructor(props: any) {
+                console.log(props);
                 super();
                 this.state = { summary: '' };
+                const url = props.routeParams.article;
+                this.getSummary(url);
         }
         getSummary(term) {
                 WikiSearchService.Search(term)
                         .then(summary => this.setState({ summary }))
         }
         public render() {
-                const url = this.props.routeParams.article;
-                this.getSummary(url);
+
                 return <p dangerouslySetInnerHTML={{ __html: this.state.summary }}></p>;
         }
 }
