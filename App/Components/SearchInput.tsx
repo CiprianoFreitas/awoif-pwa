@@ -5,28 +5,19 @@ import WikiSearchService from '../Services/WikiSearchService';
 
 interface WikiState {
         input: string;
-        summary: string;
         autocomplete: string[]
 }
 const buttonStyle = {
         margin: 12,
 };
 
-const bodyStyle = {
-        margin: 10
-};
-
 export class SearchInput extends React.Component<any, WikiState> {
         constructor() {
                 super();
-                this.state = { input: '', summary: '', autocomplete: [] };
+                this.state = { input: '', autocomplete: [] };
         }
         handleTextChange(e) {
                 this.setState({ input: e.target.value });
-        }
-        handleSearch(e) {
-                WikiSearchService.Search(this.state.input)
-                        .then(summary => this.setState({ summary }))
         }
         handleAutoComplete(value) {
                 if (value != '')
@@ -37,12 +28,10 @@ export class SearchInput extends React.Component<any, WikiState> {
         }
         handleTapAutoComplete(term, index) {
                 if (index == -1) return;
-                WikiSearchService.Search(term)
-                        .then(summary => this.setState({ summary }))
+                this.props.router.push(`/article/${term}`);
         }
         public render() {
-                return <div style={bodyStyle}>
-                        <AutoComplete
+                return <AutoComplete
                                 fullWidth={true}
                                 hintText="Search"
                                 dataSource={this.state.autocomplete}
@@ -50,7 +39,5 @@ export class SearchInput extends React.Component<any, WikiState> {
                                 onUpdateInput={(e) => this.handleAutoComplete(e)}
                                 onNewRequest={(term, index) => this.handleTapAutoComplete(term, index)}
                         />
-                        <p dangerouslySetInnerHTML={{ __html: this.state.summary }}></p>
-                </div>
         }
 }
