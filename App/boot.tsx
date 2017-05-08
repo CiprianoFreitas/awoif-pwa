@@ -1,9 +1,10 @@
 import '../index.html'
+import '../200.html'
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { App } from "./Components/App";
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 import { SearchInput } from "./Components/SearchInput";
 import { Article } from "./Components/Article";
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
@@ -21,7 +22,7 @@ if (typeof document !== 'undefined') {
             .catch((err: any) => console.log('Service worker failed to register', err))
     }
     ReactDOM.render(
-        <Router history={hashHistory}>
+        <Router history={browserHistory}>
             <Route component={App}>
                 <Route path="/" component={SearchInput} />
                 <Route path="/article/:article" component={Article} />
