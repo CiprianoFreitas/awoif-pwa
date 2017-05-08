@@ -32,13 +32,14 @@ module.exports = (env) => {
                     use: 'file-loader?name=[path][name].[ext]'
                 }
             ]
-        },
-        plugins: [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false // https://github.com/webpack/webpack/issues/1496
-                }
-            })
-        ]
+        }
+        // ,
+        // plugins: [
+        //     new webpack.optimize.UglifyJsPlugin({
+        //         compress: {
+        //             warnings: false // https://github.com/webpack/webpack/issues/1496
+        //         }
+        //     })
+        // ]
     }];
 };
