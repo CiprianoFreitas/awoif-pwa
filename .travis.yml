@@ -3,7 +3,8 @@ node_js: node
 
 script:
   - yarn build
-
+before_deploy:
+  - yarn rename
 deploy:
   provider: surge
   project: ./dist/
