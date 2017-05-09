@@ -33,9 +33,10 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn run clean && node node_modules/webpack/bin/webpack.js",
+    "build-dev": "yarn run clean && node node_modules/webpack/bin/webpack.js",
+    "build": "yarn run clean && node node_modules/webpack/bin/webpack.js --env.prod",
     "rename": "renamer --find index --replace 200 dist/index.html",
     "publish:surge": "surge dist/ https://asoifpwa.surge.sh",
-    "serve": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --history-api-fallback"
+    "serve": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --history-api-fallback "
   }
 }
