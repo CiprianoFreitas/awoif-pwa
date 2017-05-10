@@ -3,7 +3,7 @@
     "lang": "en",
     "name": "A Wiki of Ice and Fire",
     "scope": "/",
-    "display": "browser",
+    "display": "standalone",
     "start_url": "https://asoifpwa.surge.sh/",
     "short_name": "AWOIF",
     "theme_color": "#a70000",
