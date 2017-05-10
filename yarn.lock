@@ -2,10 +2,21 @@
 # yarn lockfile v1
 
 
+"@types/history@*":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.5.1.tgz#da4a145410466eac20e94b51c8778a7551d1d4db"
+
 "@types/react-dom@^0.14.23":
   version "0.14.23"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.23.tgz#cecfcfad754b4c2765fe5d29b81b301889ad6c2e"
   dependencies:
+    "@types/react" "*"
+
+"@types/react-router@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-3.0.2.tgz#f3f71ae8222e6b5e79499007fd6ed552dfeaae5b"
+  dependencies:
+    "@types/history" "*"
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^15.0.12":
@@ -2267,9 +2278,9 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0:
   dependencies:
     js-tokens "^3.0.0"
 
-material-ui@^0.17.4:
-  version "0.17.4"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.17.4.tgz#193999ecb49c3ec15ae0abb4e90fdf9a7bd343e0"
+material-ui@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.0.tgz#fcf5eddfe87d066792bd44f09b4f7c9ca7f620d6"
   dependencies:
     babel-runtime "^6.23.0"
     inline-style-prefixer "^3.0.2"

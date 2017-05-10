@@ -3,8 +3,8 @@ import '../index.html'
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { App } from "./Components/App";
+import { Home } from "./Components/Home";
 import { Router, Route, browserHistory } from 'react-router';
-import { SearchInput } from "./Components/SearchInput";
 import { Article } from "./Components/Article";
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -23,7 +23,7 @@ if (typeof document !== 'undefined') {
     ReactDOM.render(
         <Router history={browserHistory}>
             <Route component={App}>
-                <Route path="/" component={SearchInput} />
+                <Route path="/" component={Home}/>
                 <Route path="/article/:article" component={Article} />
             </Route>
         </Router>,

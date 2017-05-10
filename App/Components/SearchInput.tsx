@@ -3,15 +3,19 @@ import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
 import WikiSearchService from '../Services/WikiSearchService';
 
-interface WikiState {
+interface SearchInputState {
         input: string;
-        autocomplete: string[]
+        autocomplete: string[];
+}
+
+interface SearchInputProps {
+        handleSearch(term: string);
 }
 const buttonStyle = {
         margin: 12,
 };
 
-export class SearchInput extends React.Component<any, WikiState> {
+export class SearchInput extends React.Component<SearchInputProps, SearchInputState> {
         constructor() {
                 super();
                 this.state = { input: '', autocomplete: [] };
@@ -28,16 +32,16 @@ export class SearchInput extends React.Component<any, WikiState> {
         }
         handleTapAutoComplete(term, index) {
                 if (index == -1) return;
-                this.props.router.push(`/article/${term}`);
+                this.props.handleSearch(term);
         }
         public render() {
                 return <AutoComplete
-                                fullWidth={true}
-                                hintText="Search"
-                                dataSource={this.state.autocomplete}
-                                filter={AutoComplete.caseInsensitiveFilter}
-                                onUpdateInput={(e) => this.handleAutoComplete(e)}
-                                onNewRequest={(term, index) => this.handleTapAutoComplete(term, index)}
-                        />
+                        fullWidth={true}
+                        hintText="Search"
+                        dataSource={this.state.autocomplete}
+                        filter={AutoComplete.caseInsensitiveFilter}
+                        onUpdateInput={(e) => this.handleAutoComplete(e)}
+                        onNewRequest={(term, index) => this.handleTapAutoComplete(term, index)}
+                />
         }
 }
