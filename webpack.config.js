@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const bundleOutputDir = './dist';
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
@@ -21,19 +21,28 @@ module.exports = (env) => {
         },
         module: {
             rules: [{
-                    test: /\.tsx?$/,
-                    include: /App/,
-                    use: [
-                        'awesome-typescript-loader?silent=true'
-                    ]
-                },
-                {
-                    test: /\.html?$/,
-                    use: 'file-loader?name=[path][name].[ext]'
-                }
-            ]
+                test: /\.tsx?$/,
+                include: /App/,
+                use: [
+                    'awesome-typescript-loader?silent=true'
+                ]
+            }]
         },
-        plugins: isDevBuild ? [
+        plugins: [
+            new CopyWebpackPlugin(
+                [{
+                        from: './Images',
+                        to: './Images'
+                    },
+                    {
+                        from: './index.html'
+                    },
+                    {
+                        from: './manifest.json'
+                    }
+                ]
+            )
+        ].concat(isDevBuild ? [
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
@@ -44,6 +53,6 @@ module.exports = (env) => {
                     warnings: false // https://github.com/webpack/webpack/issues/1496
                 }
             })
-        ]
+        ])
     }];
 };
