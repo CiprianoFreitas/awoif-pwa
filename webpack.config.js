@@ -31,8 +31,8 @@ module.exports = (env) => {
         plugins: [
             new CopyWebpackPlugin(
                 [{
-                        from: './Images',
-                        to: './Images'
+                        from: './images',
+                        to: './images'
                     },
                     {
                         from: './index.html'
@@ -51,6 +51,11 @@ module.exports = (env) => {
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
                     warnings: false // https://github.com/webpack/webpack/issues/1496
+                }
+            }),
+            new webpack.DefinePlugin({
+                "process.env": {
+                    NODE_ENV: JSON.stringify("production")
                 }
             })
         ])
