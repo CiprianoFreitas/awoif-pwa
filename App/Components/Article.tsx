@@ -12,6 +12,10 @@ export class Article extends React.Component<any, any> {
                 const url = props.routeParams.article;
                 this.getSummary(url);
         }
+        componentWillReceiveProps(newProps:any, context: any){
+                const url = newProps.routeParams.article;
+                this.getSummary(url);
+        }
         getSummary(term) {
                 WikiSearchService.Search(term)
                         .then(summary => this.setState({ summary }))
