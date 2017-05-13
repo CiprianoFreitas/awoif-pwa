@@ -7,8 +7,8 @@ export default class WikiSearchService {
         return fetch(`${corsAnywhereUrl}/${wikiUrl}/index.php?action=render&title=${searchTerm}`)
             .then(response => response.text() as Promise<any>)
             .then((res: string) => {
-                var regex = new RegExp('src="/images', 'g');
-                return res.replace(regex, `src="${wikiUrl}/images`)});
+                var regex = new RegExp('/images', 'g');
+                return res.replace(regex, `${wikiUrl}/images`)});
     }
 
     static Autocomplete(searchTerm: string) {
