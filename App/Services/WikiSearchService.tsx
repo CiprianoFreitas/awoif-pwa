@@ -4,16 +4,11 @@ const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com';
 export default class WikiSearchService {
     static Search(searchTerm: string): Promise<string> {
         searchTerm = this.ToTitleCase(searchTerm);
-        return fetch(`${corsAnywhereUrl}/${wikiUrl}/api.php?action=query&format=json&prop=extracts&titles=${searchTerm}&exintro=1s&redirects=`)
-            .then(response => response.json() as Promise<any>)
-            .then((res: any) => {
-                let pages = res.query.pages;
-                for (var key in pages) {
-                    if (pages.hasOwnProperty(key)) {
-                        return pages[key].extract;
-                    }
-                }
-            });
+        return fetch(`${corsAnywhereUrl}/${wikiUrl}/index.php?action=render&title=${searchTerm}`)
+            .then(response => response.text() as Promise<any>)
+            .then((res: string) => {
+                var regex = new RegExp('src="/images', 'g');
+                return res.replace(regex, `src="${wikiUrl}/images`)});
     }
 
     static Autocomplete(searchTerm: string) {
