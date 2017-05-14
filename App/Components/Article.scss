@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    text-align: justify;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+a {
+    color: gray;
+    &:hover {
+        color: darken(gray, 70%);
+    }
+}
+
+ul {
+    list-style: none;
+}
+
+.thumbinner,
+.infobox-image {
+    width: 100% !important;
+    text-align: center;
+}
+
+.infobox.infobox-body {
+    width: 100% !important;
+}
+
+.infobox-title>b {
+    font-size: 2em;
+    line-height: 1.5em;
+}
+
+.loading-spinner {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 25vh;
+}

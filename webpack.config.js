@@ -26,6 +26,10 @@ module.exports = (env) => {
                 use: [
                     'awesome-typescript-loader?silent=true'
                 ]
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style-loader', 'css-loader', 'sass-loader']
             }]
         },
         plugins: [

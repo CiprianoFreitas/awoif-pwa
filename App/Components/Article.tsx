@@ -1,3 +1,4 @@
+import "./Article.scss";
 import * as React from "react";
 import WikiSearchService from '../Services/WikiSearchService'
 import CircularProgress from 'material-ui/CircularProgress';
@@ -27,7 +28,7 @@ export class Article extends React.Component<any, WikiState> {
         }
         public render() {
                 return <div>
-                        {this.state.loading ? <CircularProgress /> : <p dangerouslySetInnerHTML={{ __html: this.state.summary }}>
+                        {this.state.loading ? <CircularProgress className="loading-spinner"/> : <p dangerouslySetInnerHTML={{ __html: this.state.summary }}>
                         </p>}
                 </div>;
         }
