@@ -1,5 +1,6 @@
 import * as React from "react";
 import AutoComplete from 'material-ui/AutoComplete';
+import { Card } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import WikiSearchService from '../Services/WikiSearchService';
 
@@ -35,13 +36,16 @@ export class SearchInput extends React.Component<SearchInputProps, SearchInputSt
                 this.props.handleSearch(term);
         }
         public render() {
-                return <AutoComplete
-                        fullWidth={true}
-                        hintText="Search"
-                        dataSource={this.state.autocomplete}
-                        filter={AutoComplete.caseInsensitiveFilter}
-                        onUpdateInput={(e) => this.handleAutoComplete(e)}
-                        onNewRequest={(term, index) => this.handleTapAutoComplete(term, index)}
-                />
+                return <Card containerStyle={{ margin: "0 0.5em" }}>
+                        <AutoComplete
+                                underlineShow={false}
+                                fullWidth={true}
+                                hintText="Search"
+                                dataSource={this.state.autocomplete}
+                                filter={AutoComplete.caseInsensitiveFilter}
+                                onUpdateInput={(e) => this.handleAutoComplete(e)}
+                                onNewRequest={(term, index) => this.handleTapAutoComplete(term, index)}
+                        />
+                </Card>
         }
 }
