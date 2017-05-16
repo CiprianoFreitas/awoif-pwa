@@ -14,21 +14,27 @@ export class Article extends React.Component<any, WikiState> {
                 this.state = { summary: '', loading: true };
                 const url = props.routeParams.article;
                 this.getSummary(url)
-                        .then(() => { this.setState({ loading: false }); });
         }
         componentWillReceiveProps(newProps: any, context: any) {
-                this.setState({ loading: true });
                 const url = newProps.routeParams.article;
                 this.getSummary(url)
-                        .then(() => { this.setState({ loading: false }); });
         }
         getSummary(term) {
+                this.setState({ loading: true });
                 return WikiSearchService.Search(term)
                         .then(summary => this.setState({ summary }))
+                        .then(() => { this.setState({ loading: false }); })
+                        .then(()=>{
+                                var links = document.querySelectorAll("a[title]");
+                                for(let i = 0; i < links.length; i++){
+                                        let currentLink = links[i];
+                                        currentLink.setAttribute("href", currentLink.getAttribute("title"));
+                                }
+                        })
         }
         public render() {
                 return <div>
-                        {this.state.loading ? <CircularProgress className="loading-spinner"/> : <p dangerouslySetInnerHTML={{ __html: this.state.summary }}>
+                        {this.state.loading ? <CircularProgress className="loading-spinner" /> : <p dangerouslySetInnerHTML={{ __html: this.state.summary }}>
                         </p>}
                 </div>;
         }
