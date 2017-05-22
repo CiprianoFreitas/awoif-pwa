@@ -2,7 +2,10 @@ body {
     margin: 0;
     font-family: sans-serif;
     text-align: justify;
+    background-color:#1B2937;
+    color: white;
 }
+
 
 .floatleft {
     float: left;
@@ -13,9 +16,9 @@ body {
 }
 
 a {
-    color: gray;
+    color: #1DA3F6;
     &:hover {
-        color: darken(gray, 70%);
+        color: darken(#1DA3F6, 20%);
     }
 }
 

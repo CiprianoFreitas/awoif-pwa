@@ -7,7 +7,7 @@ import { SearchInput } from "./SearchInput";
 
 const muiTheme = getMuiTheme({
     appBar: {
-        color: '#a70000',
+        color: '#243548',
     },
 });
 
