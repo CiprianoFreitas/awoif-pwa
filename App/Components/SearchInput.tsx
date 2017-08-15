@@ -12,9 +12,6 @@ interface SearchInputState {
 interface SearchInputProps {
         handleSearch(term: string);
 }
-const buttonStyle = {
-        margin: 12,
-};
 
 export class SearchInput extends React.Component<SearchInputProps, SearchInputState> {
         constructor() {
@@ -36,8 +33,9 @@ export class SearchInput extends React.Component<SearchInputProps, SearchInputSt
                 this.props.handleSearch(term);
         }
         public render() {
-                return <Card containerStyle={{ margin: "0 0.5em" }}>
+                return <Card>
                         <AutoComplete
+                                textFieldStyle={{ margin: "0 0.5em" }}
                                 underlineShow={false}
                                 fullWidth={true}
                                 hintText="Search"

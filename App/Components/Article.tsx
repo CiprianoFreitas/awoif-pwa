@@ -3,6 +3,11 @@ import * as React from "react";
 import WikiSearchService from '../Services/WikiSearchService'
 import CircularProgress from 'material-ui/CircularProgress';
 import Drawer from 'material-ui/Drawer';
+import { MenuItem } from './SideDrawer';
+
+interface ArticleProps {
+        setMenuItems(descriptions: MenuItem[]): void;
+}
 
 interface WikiState {
         title: string;
@@ -10,10 +15,12 @@ interface WikiState {
         loading: boolean;
 }
 
-export class Article extends React.Component<any, WikiState> {
+export class Article extends React.Component<ArticleProps, WikiState> {
+        private handleMenuItems;
         constructor(props: any) {
                 super();
                 const url = props.routeParams.article;
+                this.handleMenuItems = props.setMenuItems;
                 this.state = { summary: '', loading: true, title: url };
                 this.getSummary(url)
         }
@@ -34,6 +41,17 @@ export class Article extends React.Component<any, WikiState> {
                                         currentLink.setAttribute("href", currentLink.getAttribute("title"));
                                 }
                         })
+                        .then(this.parseTitles)
+                        .then(this.handleMenuItems);
+        }
+        parseTitles(): MenuItem[] {
+                let descriptions : MenuItem[] = new Array;
+                var titleEls = document.getElementsByClassName('mw-headline');
+                for (let i = 0; i < titleEls.length; i++) {
+                        let currentEl = titleEls[i];
+                        descriptions.push({ description :currentEl.innerHTML, link: currentEl.id})
+                }
+                return descriptions;
         }
         public render() {
                 return <div>

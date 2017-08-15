@@ -21,7 +21,7 @@ if (typeof document !== 'undefined') {
     ReactDOM.render(
         <Router history={browserHistory}>
             <Route component={App}>
-                <Route path="/" component={Home}/>
+                <Route path="/" component={Home} />
                 <Route path="/article/:article" component={Article} />
             </Route>
         </Router>,
