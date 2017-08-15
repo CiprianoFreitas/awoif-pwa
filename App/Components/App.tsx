@@ -32,11 +32,15 @@ export class App extends React.Component<any, AppState> {
     handleMenuItems(menuItems: MenuItem[]) {
         this.setState({ menuItems });
     }
+    toggleSideDrawer(event: Event){
+        event.preventDefault();
+        this.setState({ drawerOpen: !this.state.drawerOpen });
+    }
     render() {
         return <MuiThemeProvider muiTheme={muiTheme}>
             <div>
                 <AppBar
-                    onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}
+                    onLeftIconButtonTouchTap={(event) => this.toggleSideDrawer(event)}
                     title="A Wiki of Ice and Fire"
                 />
                 <SideDrawer
